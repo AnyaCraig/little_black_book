@@ -3,9 +3,12 @@ import React from "react";
 
 var ContactList = React.createClass({
 	render: function() {
-		return <div>
 
-		</div>
+		return (
+			<div>
+				<h2>Little Black Book | Header</h2>
+			</div>
+		)
 	}
 });
 

@@ -5,7 +5,7 @@ import Nav from './nav';
 var App = React.createClass({
 	getInitialState: function(){
 		return (
-
+			
 		)
 	},
 	render: function() {
