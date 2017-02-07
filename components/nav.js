@@ -5,9 +5,9 @@ var Nav = React.createClass({
 		return (
 			<div className="nav-container">
 
-				<p>Contacts</p>
-				<p>Search</p>
-				<p>Favourites</p>
+				<span>Contacts | </span>
+				<span>Search | </span>
+				<span>Favourites</span>
 			</div>
 		)
 	}
