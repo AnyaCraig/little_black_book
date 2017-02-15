@@ -21,6 +21,18 @@ var AddContact = React.createClass({
 				facebook: "",
 				twitter: "",
 				instagram: "",
+				pinterest: "",
+				googlePlus: "",
+				skype: "",
+				birthday: "",
+				companyName: "",
+				jobTitle: "",
+				relationship: "",
+				notes: "",
+				favourite: {
+					checked: true,
+					notChecked: false
+				}
 			},
 			errorMessage: "",
 		}
@@ -125,6 +137,42 @@ var AddContact = React.createClass({
 
 				<label htmlFor="instagram">Instagram</label>
 				<input type="text" id="instagram" value={ this.state.newContact.instagram } onChange={ (evt) => this.saveToState(evt) } />
+				<br />
+
+				<label htmlFor="pinterest">Pinterest</label>
+				<input type="text" id="pinterest" value={ this.state.newContact.pinterest } onChange={ (evt) => this.saveToState(evt) } />
+				<br />
+
+				<label htmlFor="googlePlus">Google&#43;</label>
+				<input type="text" id="googlePlus" value={ this.state.newContact.googlePlus } onChange={ (evt) => this.saveToState(evt) } />
+				<br />
+
+				<label htmlFor="skype">Skype ID</label>
+				<input type="text" id="skype" value={ this.state.newContact.skype } onChange={ (evt) => this.saveToState(evt) } />
+				<br />
+
+				<label htmlFor="birthday">Birthday</label>
+				<input type="text" id="birthday" placeholder="DD/MM/YYYY" value={ this.state.newContact.birthday } onChange={ (evt) => this.saveToState(evt) } />
+				<br />
+
+				<label htmlFor="companyName">Company Name</label>
+				<input type="text" id="companyName" value={ this.state.newContact.companyName } onChange={ (evt) => this.saveToState(evt) } />
+				<br />
+
+				<label htmlFor="jobTitle">Job Title</label>
+				<input type="text" id="jobTitle" value={ this.state.newContact.jobTitle } onChange={ (evt) => this.saveToState(evt) } />
+				<br />
+
+				<label htmlFor="relationship">Relationship</label>
+				<input type="text" id="relationship" value={ this.state.newContact.relationship } onChange={ (evt) => this.saveToState(evt) } />
+				<br />
+
+				<label htmlFor="notes">Notes</label>
+				<textarea type="text" id="notes" value={ this.state.newContact.notes } onChange={ (evt) => this.saveToState(evt) }></textarea>
+				<br />
+
+				<label htmlFor="favourite">Add to favourites</label>
+				<input type="checkbox" name="favourite" value="" id="favourite" />
 				<br />
 
 				{/* the button to add the new contact */}

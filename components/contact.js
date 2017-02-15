@@ -20,9 +20,9 @@ var Contact = React.createClass({
 				<p>{contact.country}</p>
 				<p>{contact.emailAddress}</p>
 				<p>{contact.website}</p>
-				<span>Facebook: {contact.facebook} |</span>
-				<span>Twitter: {contact.twitter} |</span>
-				<span>Instagram: {contact.instagram}</span>
+				<p>Facebook: {contact.facebook} |<br />
+				Twitter: {contact.twitter} |<br />
+				Instagram: {contact.instagram}</p>
 
 				<p>--------------------</p>
 
