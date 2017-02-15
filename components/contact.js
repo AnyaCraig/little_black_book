@@ -14,7 +14,7 @@ var Contact = React.createClass({
 				{/* show the contact information */}
 				<p>{contact.firstName + " " + contact.middleName + " " + contact.lastName}</p>
 				<p>{contact.countryCode + " " + contact.phoneNumber}</p>
-				<span>{contact.unitNumber + " - " }</span>
+				{ contact.unitNumber && <span>{contact.unitNumber + " - " }</span> }
 				<span>{contact.streetNumName}</span>
 				<p>{contact.city + ", " + contact.province + " " + contact.postalCode}</p>
 				<p>{contact.country}</p>
@@ -23,6 +23,8 @@ var Contact = React.createClass({
 				<p>Facebook: {contact.facebook} |<br />
 				Twitter: {contact.twitter} |<br />
 				Instagram: {contact.instagram}</p>
+
+				<button onClick={ this.props.onDeleteContact }>Delete</button>
 
 				<p>--------------------</p>
 

@@ -85,6 +85,16 @@ var App = React.createClass({
  		this.setState({ contacts: contactsCopy.concat([newContact]) });
 	},
 
+	deleteContact: function(key) {
+ 		var contactsCopy = Array.from(this.state.contacts);
+
+		contactsCopy.splice(key, 1);
+
+		this.setState({
+			contacts: contactsCopy
+		});
+	},
+
 	render: function(){
 
 		return (
@@ -100,7 +110,7 @@ var App = React.createClass({
 					{/* mapping over our contacts array and rendering out the Contact component for each contact in state. We pass the entire contact info object to the Contact component so that it can access it*/}
 					{this.state.contacts.map((item, i) => (
 						
-					    <Contact contactInfo={item} key={i} />
+					    <Contact contactInfo={item} key={i} onDeleteContact={ (evt) => this.deleteContact(i) } />
 					))}
 
 				</div>
