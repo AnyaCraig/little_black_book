@@ -6,7 +6,8 @@ import Contact from "./contact";
 import Nav from "./nav.js";
 import AddContact from "./add_contact";
 
-require('./style.scss');
+require('./scss/style.scss');
+require('./scss/_normalize.scss');
 
 // our parent component
 // I've put in some dummy data for contacts so that we don't need to 

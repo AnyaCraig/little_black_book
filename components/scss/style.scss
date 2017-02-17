@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css?family=Quattrocento+Sans:400,400i,700,700i');
+@import 'normalize';
+
+html, body {
+	font-family: 'Quattrocento Sans', 'Helvetica', Arial, sans-serif;
+}
+
+p, ul, ol, li, a {
+	font-size: 18px;
+}
+
+h1 {
+	font-weight: 400;
+	font-size: 40px;
+	display: inline;
+
+	span {
+		font-weight: 700;
+	}
+}
+
+input, textarea {
+	padding: 10px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+/* NAV */
+
+.navContainer {
+	background: #000000;
+	color: #ffffff;
+	display: flex;
+	justify-content: space-between;
+
+	.logoContainer {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		padding-left: 5px;
+
+		.logoImg {
+			margin-right: 8px;
+			width: 70px;
+			height: 70px;
+		}
+	}
+
+	.searchContainer {
+		padding-right: 10px;
+		display: flex;
+		align-items: center;
+		width: 55%;
+		justify-content: flex-end;
+
+		input {
+			width: 100%;
+			max-width: 400px;
+		}
+
+		#searchIcon {
+			width: 35px;
+			height: 35px;
+			margin-left: 10px;
+
+			path {
+				width: 100%;
+				fill: transparent;
+				stroke: #ffffff;
+				stroke-width: 36px;
+			}
+		}
+	}
+}
+

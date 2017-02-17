@@ -1,3 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Quattrocento+Sans:400,400i,700,700i');
+@import 'normalize';
+
 html, body {
-	font-family: 'Helvetica', Arial, sans-serif;
+	font-family: 'Quattrocento Sans', 'Helvetica', Arial, sans-serif;
+}
+
+p, ul, ol, li, span, a {
+	font-size: 18px;
+}
+
+/* NAV */
+
+.nav-container {
+	background: #000000;
+	color: #ffffff;
+}
+
+.logoImg {
+	width: 60px;
+	height: 60px;
 }
