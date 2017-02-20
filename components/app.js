@@ -2,9 +2,11 @@
 import React from "react";
 
 // importing custom components
-import Contact from "./contact";
-import Nav from "./nav.js";
+import ContactList from "./contact_list";
+import Header from "./header";
 import AddContact from "./add_contact";
+import Favourites from "./favourites";
+import NavLink from "./nav_link";
 
 require('./scss/style.scss');
 require('./scss/_normalize.scss');
@@ -16,6 +18,7 @@ var App = React.createClass({
 
 	getInitialState: function() {
 		return {
+			searchTerm: "",
 			contacts: [
 				{
 					firstName:"Alice",
@@ -34,6 +37,7 @@ var App = React.createClass({
 					facebook: "alicekilgour",
 					twitter: "@alicekilgour",
 					instagram: "alicesnaps",
+					favourite: false,
 				},
 				{
 					firstName:"Mitesh",
@@ -52,6 +56,7 @@ var App = React.createClass({
 					facebook: "miteshkumar",
 					twitter: "@miteshkumar",
 					instagram: "miteshk",
+					favourite: true,
 				},
 				{
 					firstName:"Olivia",
@@ -70,9 +75,15 @@ var App = React.createClass({
 					facebook: "oliviahuang",
 					twitter: "@oliviahuang",
 					instagram: "olivingthedream",
+					favourite: true,
 				},
 			],
 		}
+	},
+
+	// add the current search term to state
+	addSearchTerm: function (searchTerm) {
+		this.setState({ searchTerm: searchTerm.toLowerCase() });
 	},
 
 	// the function which will add a new contact to state
@@ -86,6 +97,7 @@ var App = React.createClass({
  		this.setState({ contacts: contactsCopy.concat([newContact]) });
 	},
 
+	// delete a contact using the key (array index) to indentify it
 	deleteContact: function(key) {
  		var contactsCopy = Array.from(this.state.contacts);
 
@@ -99,27 +111,41 @@ var App = React.createClass({
 	render: function(){
 
 		return (
-			<div className="app-container">
+			<div className="appContainer clearfix">
 				
-				{/* this Nav component has only dummy content so far.
-				It doesn't actually work */}
-				<Nav />
+				{/* the header with the search input and logo */}
+				<Header onAddSearchTerm={(searchTerm) => this.addSearchTerm(searchTerm)}/>
+				
+				<div className="main">
 
-				<div className="contact-list">
-					<h2>My contacts</h2>
+					{/* the navigation sidebar */}
+					<aside>
+
+						{/* the navigation link components */}
+						<NavLink classNames="sidebarLink contactsListLink" linkName={ "My Contacts" } />
 					
-					{/* mapping over our contacts array and rendering out the Contact component for each contact in state. We pass the entire contact info object to the Contact component so that it can access it*/}
-					{this.state.contacts.map((item, i) => (
-						
-					    <Contact contactInfo={item} key={i} onDeleteContact={ (evt) => this.deleteContact(i) } />
-					))}
-
-				</div>
-				
-				{/* the AddContact component */}
-				<AddContact onAddContact={(newContact) => this.addContact(newContact)}/>
+						<NavLink classNames="sidebarLink favouritesLink" linkName={ "My Favourites "} />
 			
-			</div>
+						<NavLink classNames="sidebarLink groupsLink" linkName={ "My Groups" } />
+					</aside>
+					
+					{/* the main display area */}
+					<div className="content">
+
+						{/* our actual list of contacts */}
+						<ContactList 	contacts={ this.state.contacts }
+										searchTerm = {this.state.searchTerm} 
+										onDeleteContact={ (i) => this.deleteContact(i) }/>
+						
+						{/* a list of favourite contacts */}
+						<Favourites contacts={this.state.contacts}/>
+
+						{/* the AddContact component */}
+						<AddContact onAddContact={(newContact) => this.addContact(newContact)}/>
+
+					</div> 
+				</div> 
+			</div> 
 		)
 	}
 });

@@ -9,7 +9,7 @@ var Contact = React.createClass({
 		var contact = this.props.contactInfo;
 
 		return (
-			<div className="contact-container">
+			<div className="contactContainer">
 
 				{/* show the contact information */}
 				<p>{contact.firstName + " " + contact.middleName + " " + contact.lastName}</p>
@@ -24,8 +24,9 @@ var Contact = React.createClass({
 				Twitter: {contact.twitter} |<br />
 				Instagram: {contact.instagram}</p>
 
-				<button onClick={ this.props.onDeleteContact }>Delete</button>
-
+				
+				<button onClick={ (evt) => this.props.onDeleteContact(evt) }>Delete</button>
+				
 				<p>--------------------</p>
 
 			</div>

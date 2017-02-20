@@ -29,10 +29,7 @@ var AddContact = React.createClass({
 				jobTitle: "",
 				relationship: "",
 				notes: "",
-				favourite: {
-					checked: true,
-					notChecked: false
-				}
+				favourite: false
 			},
 			errorMessage: "",
 		}
@@ -52,6 +49,19 @@ var AddContact = React.createClass({
 		this.setState({ newContact: newContactCopy});
 	},
 
+	// toggle whether the contact is a favourite
+	isFavourite: function(evt) {
+
+		// make a copy of the newContact object in state
+		var newContactCopy = Object.assign(this.state.newContact);
+
+		// toggle the favourite between true and false
+		newContactCopy.favourite = !newContactCopy.favourite;
+
+		// replace the newContact object in state with our altered copy
+		this.setState({ newContact: newContactCopy});
+	},
+
 	// push the new contact to parent state
 	addNewContact: function() {
 		
@@ -64,7 +74,16 @@ var AddContact = React.createClass({
 		} else {
 			console.log("You didn't enter a name!");
 		}
+	},
 
+	// toggle whether an item is marked as completed or not
+	toggleCompleted: function(i) {
+	  var itemsCopy = Array.from(this.state.items);
+
+	  itemsCopy[i].completed = !itemsCopy[i].completed;
+
+	  this.setState({ items: itemsCopy });
+	  
 	},
 
 	render: function() {
@@ -170,9 +189,15 @@ var AddContact = React.createClass({
 				<label htmlFor="notes">Notes</label>
 				<textarea type="text" id="notes" value={ this.state.newContact.notes } onChange={ (evt) => this.saveToState(evt) }></textarea>
 				<br />
-
+				
 				<label htmlFor="favourite">Add to favourites</label>
-				<input type="checkbox" name="favourite" value="" id="favourite" />
+				
+				{/* checkbox for favouriting a contact */}
+				<input 	type="checkbox" 
+						onChange={(evt) => this.isFavourite(evt)}
+						checked={this.state.newContact.favourite}  
+						id="favourite" />
+
 				<br />
 
 				{/* the button to add the new contact */}

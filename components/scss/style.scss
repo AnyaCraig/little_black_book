@@ -1,8 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Quattrocento+Sans:400,400i,700,700i');
 @import 'normalize';
+@import 'borderbox';
+
+@import 'colours';/* all our custom colours */
 
 html, body {
 	font-family: 'Quattrocento Sans', 'Helvetica', Arial, sans-serif;
+}
+
+/* main app container */
+.appContainer {
+	background-color: $orchid;
 }
 
 p, ul, ol, li, a {
@@ -26,19 +34,20 @@ input, textarea {
 	border-radius: 3px;
 }
 
-/* NAV */
+/* HEADER */
 
-.navContainer {
-	background: #000000;
+.headerContainer {
+	background: $deep-plum;
 	color: #ffffff;
 	display: flex;
 	justify-content: space-between;
 
+	/* the wrapper for the logo section of the header */
 	.logoContainer {
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
-		padding-left: 5px;
+		padding-left: 7px;
 
 		.logoImg {
 			margin-right: 8px;
@@ -46,31 +55,86 @@ input, textarea {
 			height: 70px;
 		}
 	}
-
+	
+	/* the wrapper for the search section of the header */
 	.searchContainer {
-		padding-right: 10px;
+		padding-right: 15px;
 		display: flex;
 		align-items: center;
 		width: 55%;
 		justify-content: flex-end;
 
 		input {
-			width: 100%;
+			width: 70%;
 			max-width: 400px;
+			min-width: 150px;
+			border: 0 none;
+			background-color: $orchid;
+
 		}
 
+		/* the magnifying glass icon */
 		#searchIcon {
 			width: 35px;
 			height: 35px;
-			margin-left: 10px;
+			margin-left: 15px;
 
 			path {
 				width: 100%;
 				fill: transparent;
-				stroke: #ffffff;
+				stroke: $aqua;
 				stroke-width: 36px;
 			}
 		}
 	}
 }
 
+/* the app contents below the header */
+div.main {
+	display: flex;
+	flex-direction: row;
+}
+
+/* the navigation sidebar */
+aside {
+	background-color: $plum;
+	padding: 15px 0;
+
+	.sidebarLink {
+		width: 100%;
+		padding: 15px 25px;
+		text-align: center;
+		font-size: 20px;
+		color: $orchid;
+	}
+}
+
+/* the main display area */
+.content {
+	padding: 30px 50px;
+	float: left;
+	flex: 1;
+	color: $deep-plum;
+}
+
+/* CONTACT PREVIEW */
+
+.contactPreviewContainer {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	margin-bottom: 15px;
+}
+
+.previewImage {
+	width: 40px;
+	height: 40px;
+	background-size: 100%;
+	display: inline-block;
+	margin-right: 15px;
+}
+
+.previewName {
+	font-size: 20px;
+}
