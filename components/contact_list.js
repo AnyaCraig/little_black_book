@@ -43,13 +43,16 @@ var ContactList = React.createClass({
 			// filter out contacts who don't match the search term
 			filteredList = this.props.contacts.filter(
 				(contact) => {
-					return contact.firstName.toLowerCase().indexOf(this.props.searchTerm) !== -1 
+					const fullName = contact.firstName + ' ' + contact.middleName + ' ' + contact.lastName;
+
+					const briefName = contact.firstName + ' ' + contact.lastName + ' ';
+
+
+					return fullName.toLowerCase().indexOf(this.props.searchTerm) !== -1 
 					||
 
-					contact.middleName.toLowerCase().indexOf(this.props.searchTerm) !== -1
-					||
-
-					contact.lastName.toLowerCase().indexOf(this.props.searchTerm) !== -1;
+					briefName.toLowerCase().indexOf(this.props.searchTerm) !== -1;
+		
 				}
 			
 			);

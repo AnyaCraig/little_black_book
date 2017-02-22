@@ -15,7 +15,7 @@ var Header = React.createClass({
 					<h1>little<span>black</span>book</h1>
 				</div>
 
-				<Search onAddSearchTerm={ (searchTerm) => this.props.onAddSearchTerm(searchTerm) } />
+				<Search searchTerm={ this.props.searchTerm } onAddSearchTerm={ (searchTerm) => this.props.onAddSearchTerm(searchTerm) } />
 			</div>
 		)
 
