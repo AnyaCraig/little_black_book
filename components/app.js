@@ -114,9 +114,10 @@ var App = React.createClass({
 			<div className="appContainer clearfix">
 				
 				{/* the header with the search input and logo */}
-				<Header onAddSearchTerm={(searchTerm) => this.addSearchTerm(searchTerm)}/>
 
-				 <Link className="addContactBtn" to="/addcontact">+</Link>
+				<Link className="addContactBtn" to="/addcontact">+</Link>
+
+				<Header searchTerm={ this.state.searchTerm } onAddSearchTerm={(searchTerm) => this.addSearchTerm(searchTerm)}/>
 				
 				<div className="main">
 
