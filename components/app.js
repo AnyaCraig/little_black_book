@@ -1,11 +1,9 @@
 // importing libraries, etc.
 import React from "react";
+import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router';
 
 // importing custom components
-import ContactList from "./contact_list";
 import Header from "./header";
-import AddContact from "./add_contact";
-import Favourites from "./favourites";
 import NavLink from "./nav_link";
 
 require('./scss/style.scss');
@@ -88,13 +86,15 @@ var App = React.createClass({
 
 	// the function which will add a new contact to state
 	// when passed up from the AddNewContact component
-	addContact: function(newContact) {
-
+	addContactToList: function(newContact) {
+		console.log("addContact", newContact);
 		// make a copy of the contacts array in state
  		var contactsCopy = Array.from(this.state.contacts);
  		
  		// concatenate our new contact item to the array and set state
  		this.setState({ contacts: contactsCopy.concat([newContact]) });
+
+		browserHistory.push("/");
 	},
 
 	// delete a contact using the key (array index) to indentify it
@@ -115,6 +115,8 @@ var App = React.createClass({
 				
 				{/* the header with the search input and logo */}
 				<Header onAddSearchTerm={(searchTerm) => this.addSearchTerm(searchTerm)}/>
+
+				 <Link className="addContactBtn" to="/addcontact">+</Link>
 				
 				<div className="main">
 
@@ -122,26 +124,23 @@ var App = React.createClass({
 					<aside>
 
 						{/* the navigation link components */}
-						<NavLink classNames="sidebarLink contactsListLink" linkName={ "My Contacts" } />
-					
-						<NavLink classNames="sidebarLink favouritesLink" linkName={ "My Favourites "} />
-			
-						<NavLink classNames="sidebarLink groupsLink" linkName={ "My Groups" } />
+						<nav>
+							<ul>
+								<li><Link to="/">My contacts</Link></li>
+								<li><Link to="/favourites">My favourites</Link></li>
+							</ul>
+						</nav>
+       					 
 					</aside>
 					
 					{/* the main display area */}
 					<div className="content">
-
-						{/* our actual list of contacts */}
-						<ContactList 	contacts={ this.state.contacts }
-										searchTerm = {this.state.searchTerm} 
-										onDeleteContact={ (i) => this.deleteContact(i) }/>
 						
-						{/* a list of favourite contacts */}
-						<Favourites contacts={this.state.contacts}/>
-
-						{/* the AddContact component */}
-						<AddContact onAddContact={(newContact) => this.addContact(newContact)}/>
+						{ React.cloneElement(this.props.children, {
+					    	searchTerm: this.state.searchTerm,
+					        contacts: this.state.contacts,
+					        onAddContact: this.addContactToList
+					    })}
 
 					</div> 
 				</div> 

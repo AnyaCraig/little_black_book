@@ -55,4 +55,4 @@ var Favourites = React.createClass({
 	}
 });
 
-export default Favourites;
+module.exports = Favourites;
