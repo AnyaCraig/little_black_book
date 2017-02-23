@@ -11,7 +11,7 @@ html, body, button {
 /* main app container */
 .appContainer {
 	background-color: $orchid;
-	height:100vh;
+	min-height:100vh;
 	display: flex;
 }
 
@@ -167,8 +167,7 @@ div.main {
 	display: flex;
 	flex-direction: row;
 	flex: 1;
-	top: 78.88px;
-    position: relative;
+	padding-top: 78.88px;
 }
 
 /* the navigation sidebar */
@@ -208,7 +207,6 @@ aside {
 /* the main display area */
 .content {
 	padding: 30px 50px;
-	float: left;
 	flex: 1;
 	color: $deep-plum;
 	background-color: $orchid;
@@ -262,7 +260,5 @@ aside {
 }
 
 /* ADD CONTACT PAGE */
-.add-contact-container {
-
-	
+.addContactContainer {
 }

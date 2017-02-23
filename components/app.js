@@ -80,6 +80,14 @@ var App = React.createClass({
 		}
 	},
 
+	toggleFavourites: function(showFavesOnly) {
+		if (showFavesOnly == true) {
+			this.setState({showFavourites: true});
+		} else {
+			this.setState({showFavourites: false});
+		}
+	},
+
 	// add the current search term to state
 	addSearchTerm: function (searchTerm) {
 		this.setState({ searchTerm: searchTerm.toLowerCase() });
@@ -128,8 +136,8 @@ var App = React.createClass({
 						{/* the navigation link components */}
 						<nav>
 							<ul>
-								<li><Link to="/">My contacts</Link></li>
-								<li><Link to="/favourites">My favourites</Link></li>
+								<li><Link to="/" onClick={(evt) => this.toggleFavourites(false)}>My contacts</Link></li>
+								<li><Link to="/" onClick={(evt) => this.toggleFavourites(true)}>My favourites</Link></li>
 							</ul>
 						</nav>
        					 

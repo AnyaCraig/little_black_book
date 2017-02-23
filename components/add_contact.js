@@ -88,7 +88,7 @@ var AddContact = React.createClass({
 
 	render: function() {
 		return (
-			<div className="add-contact-container">
+			<div className="addContactContainer">
 
 				<h2>Add a new contact</h2>
 				

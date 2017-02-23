@@ -8,7 +8,7 @@ var ContactList = React.createClass({
 	// check if there are any contacts in the list
 	// if there are, render the list
 	// if there are none, render an error message
-	renderContactsList: function(list) {
+	renderContactsList: function(list, errorMessage) {
 
 		if (list.length > 0) {
 
@@ -28,13 +28,22 @@ var ContactList = React.createClass({
 		} else {
 
 			return (
-			<div className="listEmpty">Sorry, that search didn't return any results!</div>
+			<div className="listEmpty">{errorMessage}</div>
 			);
 		}
 	},
 
-
 	render: function() {
+
+		// set the title based on whether we're showing favourites 
+		// or general contacts
+		var title = this.props.showFaves? "Favourites": "Contacts";
+
+		// set the error message based on whether we're showing favourites
+		// or search results
+		var errorMessage = this.props.showFaves? 
+			"You don't have any favourites!" :
+			"Sorry, there are no results for your search.";
 
 		var filteredList;
 		var listToShow;
@@ -63,9 +72,7 @@ var ContactList = React.createClass({
 					||
 
 					briefName.toLowerCase().indexOf(this.props.searchTerm) !== -1;
-		
 				}
-			
 			);
 		} else {
 			
@@ -75,10 +82,10 @@ var ContactList = React.createClass({
 
 		return (
 			<div className="contactListContainer">
-				<h2>My contacts</h2>
+				<h2>My {title}</h2>
 				
 				{/* run the function to check if the list is empty */}
-				{ this.renderContactsList(listToShow) }
+				{ this.renderContactsList(listToShow, errorMessage) }
 	
 			</div>
 		);
