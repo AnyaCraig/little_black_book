@@ -17,6 +17,7 @@ var App = React.createClass({
 	getInitialState: function() {
 		return {
 			searchTerm: "",
+			showFavourites: false,
 			contacts: [
 				{
 					firstName:"Alice",
@@ -139,6 +140,7 @@ var App = React.createClass({
 						
 						{ React.cloneElement(this.props.children, {
 					    	searchTerm: this.state.searchTerm,
+					    	showFaves: this.state.showFavourites,
 					        contacts: this.state.contacts,
 					        onAddContact: this.addContactToList
 					    })}

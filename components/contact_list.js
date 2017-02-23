@@ -37,11 +37,22 @@ var ContactList = React.createClass({
 	render: function() {
 
 		var filteredList;
+		var listToShow;
+
+		if (this.props.showFaves == true) {
+			filteredList = this.props.contacts.filter(
+				(contact) => {
+					return contact.favourite == true;
+				}
+			);
+		} else {
+			filteredList = this.props.contacts;
+		}
 
 		if (this.props.searchTerm !== "") {
 			
 			// filter out contacts who don't match the search term
-			filteredList = this.props.contacts.filter(
+			listToShow = filteredList.filter(
 				(contact) => {
 					const fullName = contact.firstName + ' ' + contact.middleName + ' ' + contact.lastName;
 
@@ -59,7 +70,7 @@ var ContactList = React.createClass({
 		} else {
 			
 			// if there is no search term, don't filter the list
-			filteredList = this.props.contacts;
+			listToShow = filteredList;
 		}
 
 		return (
@@ -67,7 +78,7 @@ var ContactList = React.createClass({
 				<h2>My contacts</h2>
 				
 				{/* run the function to check if the list is empty */}
-				{ this.renderContactsList(filteredList) }
+				{ this.renderContactsList(listToShow) }
 	
 			</div>
 		);
