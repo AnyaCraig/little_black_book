@@ -1,6 +1,7 @@
 import React from "react";
 import Contact from "./contact";
 import ContactPreview from "./contact_preview";
+import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router';
 
 // the list of contacts
 var ContactList = React.createClass({
@@ -16,7 +17,9 @@ var ContactList = React.createClass({
 				// mapping over our contacts array and rendering out the Contact component for each contact in state. We pass the entire contact info object to the Contact component so that it can access it
 				list.map((item, i) => (
 
-					<ContactPreview contactInfo={item} key={i} />
+					<Link className="contactDetails" to={`/contact/${i}`} key={i}>
+						<ContactPreview contactInfo={item} key={i} />
+					</Link>
 					
 					// just commenting out the detailed contact component below for now since we probably just want to render out a brief preview of each in the list (image, name)
 
@@ -82,6 +85,7 @@ var ContactList = React.createClass({
 
 		return (
 			<div className="contactListContainer">
+				<Link className="addContactBtn" to="/addcontact">+</Link>
 				<h2>My {title}</h2>
 				
 				{/* run the function to check if the list is empty */}
