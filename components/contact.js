@@ -2,15 +2,16 @@ import React from "react";
 import { browserHistory } from 'react-router';
 
 
-
 var Contact = React.createClass({
 
 	render: function() {
 		
-		// setting the contact info object from props as a variable
-		// so that it's quicker to access in our JSX
-		var contact = this.props.contacts[this.props.params.id];
-
+		// determining which contact should be rendered
+		// based on which contact matches the firebase key
+		var contact = this.props.contacts.find(contact => {
+			return contact.id === this.props.params.id
+		});
+		
 		return (
 			<div className="contactContainer">
 
@@ -27,8 +28,9 @@ var Contact = React.createClass({
 				<p>Facebook: {contact.facebook} <br />
 				Twitter: {contact.twitter} <br />
 				Instagram: {contact.instagram}</p>
-
-				<button onClick={ (evt) => this.props.onDeleteContact(this.props.params.id) }>Delete</button>
+				
+				{/* the button to delete a contact */}
+				<button onClick={ (evt) => this.props.onDeleteContact(contact.id) }>Delete</button>
 				
 			</div>
 		)
