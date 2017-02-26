@@ -81,7 +81,7 @@ button {
   letter-spacing: 1.1px;
   color: $orchid;
   font-size: 20px !important;
-  padding: 20px 35px;
+  padding: 15px 25px;
   text-shadow: 1px 1px 1px $dark-aqua;
   text-decoration: none;
   border: none;
@@ -99,6 +99,17 @@ button:hover {
   background-image: -o-linear-gradient(top, #5ac7bc, #7bebe2);
   background-image: linear-gradient(to bottom, #5ac7bc, #7bebe2);
   text-decoration: none;
+}
+
+button.closeBtn {
+	position: absolute;
+	top: 80px;
+	right: 30px;
+	background: none;
+	color: $deep-plum;
+	text-shadow: none;
+	padding: 10px;
+	font-size: 30px !important;
 }
 
 /* HEADER */
@@ -234,6 +245,14 @@ aside {
 
 	::hover {
 		text-decoration: none;
+	}
+}
+
+.contactDetails {
+	text-decoration: none;
+
+	:hover {
+		color: $aqua;
 	}
 }
 

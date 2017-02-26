@@ -107,6 +107,13 @@ var App = React.createClass({
 		this.setState({
 			contacts: contactsCopy
 		});
+
+		browserHistory.push("/");
+
+	},
+
+	redirectToHome: function() {
+		browserHistory.push("/");
 	},
 
 	render: function(){
@@ -115,8 +122,6 @@ var App = React.createClass({
 			<div className="appContainer clearfix">
 				
 				{/* the header with the search input and logo */}
-
-				<Link className="addContactBtn" to="/addcontact">+</Link>
 
 				<Header searchTerm={ this.state.searchTerm } onAddSearchTerm={(searchTerm) => this.addSearchTerm(searchTerm)}/>
 				
@@ -144,6 +149,8 @@ var App = React.createClass({
 					        onAddContact: this.addContactToList,
 					        errorMessage: this.state.defaultErrorMessage,
 					        title: "Contacts",
+					        onDeleteContact: this.deleteContact,
+					        redirectToHome: this.redirectToHome,
 					    })}
 
 					</div> 
