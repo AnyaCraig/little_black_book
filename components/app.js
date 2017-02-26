@@ -1,17 +1,15 @@
 // importing libraries, etc.
 import React from "react";
 import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router';
+import firebase from "firebase";
 
 // importing custom components
 import Header from "./header";
-import NavLink from "./nav_link";
 
 require('./scss/style.scss');
 require('./scss/_normalize.scss');
 
 // our parent component
-// I've put in some dummy data for contacts so that we don't need to 
-// add new ones every time we want to test it
 var App = React.createClass({
 
 	getInitialState: function() {
@@ -27,33 +25,35 @@ var App = React.createClass({
 		this.setState({ searchTerm: searchTerm.toLowerCase() });
 	},
 
-	// the function which will add a new contact to state
+	// the function which will add a new contact to Firebase
 	// when passed up from the AddNewContact component
 	addContactToList: function(newContact) {
-		console.log("addContact", newContact);
-		// make a copy of the contacts array in state
- 		var contactsCopy = Array.from(this.state.contacts);
- 		
- 		// concatenate our new contact item to the array and set state
- 		this.setState({ contacts: contactsCopy.concat([newContact]) });
 
-		browserHistory.push("/");
+		// our firebase ref (the contacts key/list)
+ 		const firebaseRef = firebase.database().ref('contacts');
+
+		// push our new contact into our Firebase contacts list
+ 		firebaseRef.push(newContact);
+
+		// redirect to main page (contacts list)
+		this.redirectToHome();
 	},
 
-	// delete a contact using the key (array index) to indentify it
+	// delete a contact using the firebase key to indentify it
 	deleteContact: function(key) {
- 		var contactsCopy = Array.from(this.state.contacts);
 
-		contactsCopy.splice(key, 1);
+		// our firebase ref (the actual contact in firebase)
+		const firebaseRef = firebase.database().ref('contacts/' + key);
 
-		this.setState({
-			contacts: contactsCopy
-		});
-
-		browserHistory.push("/");
+		// remove this contact from the firebase contacts list
+		firebaseRef.remove();
+		
+		// redirect to main page (contacts list)
+		this.redirectToHome();
 
 	},
 
+	// redirect to the main page
 	redirectToHome: function() {
 		browserHistory.push("/");
 	},
@@ -64,7 +64,6 @@ var App = React.createClass({
 			<div className="appContainer clearfix">
 				
 				{/* the header with the search input and logo */}
-
 				<Header searchTerm={ this.state.searchTerm } onAddSearchTerm={(searchTerm) => this.addSearchTerm(searchTerm)}/>
 				
 				<div className="main">
@@ -72,7 +71,7 @@ var App = React.createClass({
 					{/* the navigation sidebar */}
 					<aside>
 
-						{/* the navigation link components */}
+						{/* the navigation links */}
 						<nav>
 							<ul>
 								<li><Link to="/">My contacts</Link></li>
@@ -85,6 +84,7 @@ var App = React.createClass({
 					{/* the main display area */}
 					<div className="content">
 						
+						{/* passing props to all the child components */}
 						{ React.cloneElement(this.props.children, {
 					    	searchTerm: this.state.searchTerm,
 					        contacts: this.state.contacts,
@@ -99,6 +99,32 @@ var App = React.createClass({
 				</div> 
 			</div> 
 		)
+	},
+
+	// called after our component renders
+	componentDidMount() {
+
+
+		const firebaseRef = firebase.database().ref('contacts');
+
+		// update our state when a contact is added to firebase
+		// also add all contacts in state on app load
+		firebaseRef.on("child_added", (snapshot) => {
+			const contact = snapshot.val();
+
+			// add the firebase key to the contact object
+			contact.id = snapshot.key;
+
+		  	this.setState({ contacts: this.state.contacts.concat([contact])});
+		});
+		
+		// update our state when a contact is deleted from firebase
+		firebaseRef.on('child_removed', (child) => {
+		    const newContactList = this.state.contacts.filter(
+		      	contact => contact.id != child.key);
+		    this.setState({contacts: newContactList });
+	    });
+
 	}
 });
 
