@@ -105,11 +105,18 @@ button.closeBtn {
 	position: absolute;
 	top: 80px;
 	right: 30px;
+	width: 60px;
+	height: 60px;
 	background: none;
 	color: $deep-plum;
 	text-shadow: none;
 	padding: 10px;
 	font-size: 30px !important;
+}
+
+
+.closeBtn {
+	width: 100%;
 }
 
 /* HEADER */

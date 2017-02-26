@@ -1,5 +1,6 @@
 import React from "react";
 import { browserHistory } from 'react-router';
+import closeBtn from './img/closeBtn.png';
 
 
 
@@ -14,7 +15,7 @@ var Contact = React.createClass({
 		return (
 			<div className="contactContainer">
 
-				<button className="closeBtn" onClick={ (evt) => this.props.redirectToHome() }>X</button>
+				<button className="closeBtn" onClick={ (evt) => this.props.redirectToHome() }><img className="closeBtn" src={ closeBtn} /></button>
 
 				{/* show the contact information */}
 				<h2>{contact.firstName + " " + contact.middleName + " " + contact.lastName}</h2>
