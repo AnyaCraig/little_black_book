@@ -17,7 +17,7 @@ var App = React.createClass({
 	getInitialState: function() {
 		return {
 			searchTerm: "",
-			showFavourites: false,
+			defaultErrorMessage: "There are no results!",
 			contacts: [
 				{
 					firstName:"Alice",
@@ -80,14 +80,6 @@ var App = React.createClass({
 		}
 	},
 
-	toggleFavourites: function(showFavesOnly) {
-		if (showFavesOnly == true) {
-			this.setState({showFavourites: true});
-		} else {
-			this.setState({showFavourites: false});
-		}
-	},
-
 	// add the current search term to state
 	addSearchTerm: function (searchTerm) {
 		this.setState({ searchTerm: searchTerm.toLowerCase() });
@@ -136,8 +128,8 @@ var App = React.createClass({
 						{/* the navigation link components */}
 						<nav>
 							<ul>
-								<li><Link to="/" onClick={(evt) => this.toggleFavourites(false)}>My contacts</Link></li>
-								<li><Link to="/" onClick={(evt) => this.toggleFavourites(true)}>My favourites</Link></li>
+								<li><Link to="/">My contacts</Link></li>
+								<li><Link to="/favourites">My favourites</Link></li>
 							</ul>
 						</nav>
        					 
@@ -148,9 +140,10 @@ var App = React.createClass({
 						
 						{ React.cloneElement(this.props.children, {
 					    	searchTerm: this.state.searchTerm,
-					    	showFaves: this.state.showFavourites,
 					        contacts: this.state.contacts,
-					        onAddContact: this.addContactToList
+					        onAddContact: this.addContactToList,
+					        errorMessage: this.state.defaultErrorMessage,
+					        title: "Contacts",
 					    })}
 
 					</div> 

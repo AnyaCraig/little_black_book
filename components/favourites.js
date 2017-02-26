@@ -1,56 +1,33 @@
 import React from "react";
 
-import Contact from "./contact";
-import ContactPreview from "./contact_preview";
+import SearchFilter from "./search_filter";
 
-// a list of favourites
+// a component to filter the contacts list by favourites
 var Favourites = React.createClass({
 
-	renderFavourites: function(list) {
-
-		// if the list has anything in it, map over the contacts in the list
-		if (list.length > 0) {
-
-			return (
-				// mapping over our contacts array and rendering out the Contact component for each contact in state. We pass the entire contact info object to the Contact component so that it can access it
-				list.map((item, i) => (
-					
-				    <ContactPreview contactInfo={item} key={i} />
-				    
-				    // just commenting out the full contact profile for now
-				    //<Contact contactInfo={item} key={i} />
-				
-				))
-			);
-
-		} else {
-
-			// otherwise, return an error message
-			return (
-			<div className="listEmpty">You don't have any favourites!</div>
-			);
-		}
-
-
-	},
-
-	render: function() {
+	filterFavourites: function(contactList) {
 
 		// filter the list of contacts so that only those who are favourites are left
-		var favourites = this.props.contacts.filter(
+		var favourites = contactList.filter(
 			(contact) => {
 				return contact.favourite == true;
 			}
 		);
+	
+		// return the list of favourites
+		return favourites;
+	},
+
+	render: function() {
+
+		var errorMessage = "You don't have any favourites!";
+		var title = "Favourites";
 
 		return (
-			<div className="favouritesContainer">
-				<h2>My favourites</h2>
 				
-				{/* the function to render the list */}
-				{ this.renderFavourites(favourites) }
-		
-			</div>
+				// pass the filtered list to the SearchFilter component
+				// so that it can be filtered by search term
+				<SearchFilter contacts={this.filterFavourites(this.props.contacts)} title={title} errorMessage={errorMessage} searchTerm = {this.props.searchTerm}/>
 		);
 	}
 });
