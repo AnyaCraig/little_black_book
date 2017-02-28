@@ -1,4 +1,6 @@
 import React from "react";
+import AvatarCropper from "react-avatar-cropper";
+
 
 var AddContact = React.createClass({
 	
@@ -86,6 +88,19 @@ var AddContact = React.createClass({
 	  
 	},
 
+	handleFile: function(e) {
+	    var reader = new FileReader();
+	    var file = e.target.files[0];
+
+	    if (!file) return;
+
+	    reader.onload = function(img) {
+	      ReactDom.findDOMNode(this.refs.in).value = '';
+	      this.props.handleFileChange(img.target.result);
+	    }.bind(this);
+	    reader.readAsDataURL(file);
+	},
+
 	render: function() {
 		return (
 			<div className="addContactContainer">
@@ -93,6 +108,11 @@ var AddContact = React.createClass({
 				<h2>Add a new contact</h2>
 				
 				{/* all the inputs for adding a contact */}
+
+				<div className="fieldWrapper">
+					<label htmlFor="firstName">Profile Image</label>
+      				<input id="avatar" ref="in" type="file" accept="img/avatar/*" onChange={this.handleFile} />
+				</div>
 				<div className="fieldWrapper">
 					<label htmlFor="firstName">First Name</label>
 					<input type="text" id="firstName" value={ this.state.newContact.firstName } onChange={ (evt) => this.saveToState(evt) } />
