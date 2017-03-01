@@ -110,9 +110,10 @@ var AddContact = React.createClass({
 				{/* all the inputs for adding a contact */}
 
 				<div className="fieldWrapper">
-					<label htmlFor="firstName">Profile Image</label>
+					<label htmlFor="avatar">Profile Image</label>
       				<input id="avatar" ref="in" type="file" accept="img/avatar/*" onChange={this.handleFile} />
 				</div>
+				
 				<div className="fieldWrapper">
 					<label htmlFor="firstName">First Name</label>
 					<input type="text" id="firstName" value={ this.state.newContact.firstName } onChange={ (evt) => this.saveToState(evt) } />
