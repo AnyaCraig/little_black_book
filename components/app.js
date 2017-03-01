@@ -1,5 +1,6 @@
 // importing libraries, etc.
 import React from "react";
+import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router';
 import firebase from "firebase";
 

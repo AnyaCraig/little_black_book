@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from 'react-dom';
 import AvatarCropper from "react-avatar-cropper";
 
 
@@ -88,6 +89,14 @@ var AddContact = React.createClass({
 	  
 	},
 
+	handleFileChange: function(dataURI) {
+	    this.setState({
+	      img: dataURI,
+	      croppedImg: this.state.croppedImg,
+	      cropperOpen: true
+	    });
+  	},
+
 	handleFile: function(e) {
 	    var reader = new FileReader();
 	    var file = e.target.files[0];
@@ -95,8 +104,8 @@ var AddContact = React.createClass({
 	    if (!file) return;
 
 	    reader.onload = function(img) {
-	      ReactDom.findDOMNode(this.refs.in).value = '';
-	      this.props.handleFileChange(img.target.result);
+	      ReactDOM.findDOMNode(this.refs.in).value = '';
+	      this.handleFileChange(img.target.result);
 	    }.bind(this);
 	    reader.readAsDataURL(file);
 	},
