@@ -257,6 +257,14 @@ var AddContact = React.createClass({
 				{/* the button to add the new contact */}
 				<button onClick={() => this.addNewContact()}>Add contact</button>
 
+			    <AvatarCropper
+			      onRequestHide={this.props.onRequestHide}
+			      onCrop={this.props.onCrop}
+			      image={this.props.image}
+			      width={this.props.width}
+			      height={this.props.height}
+			    />
+			
 			</div>
 		)
 	}
